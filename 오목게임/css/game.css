@@ -1,0 +1,60 @@
+#active-game {
+  text-align: center;
+  margin: 2rem 0 5rem 0;
+  display: none;
+}
+
+#game-over {
+  width: 90%;
+  max-width: 40rem;
+  margin: auto;
+  padding: 1rem 2rem;
+  background-color: var(--color-font-player-symbol);
+  box-shadow: 0 2px 3px var(--color-font-basic);
+  border-radius: 4px;
+  color: var(--color-font-header);
+  display: none;
+}
+
+#game-over h2 {
+  font-size: 3rem;
+  margin: 0.5rem 0;
+}
+
+#active-player-name {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: var(--color-font-player-symbol);
+}
+
+#game-board {
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(9, 3rem);
+  grid-template-rows: repeat(9, 3rem);
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+#game-board li {
+  background-color: rgb(215, 187, 247);
+  border-radius: 2px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+#game-board li:hover {
+  background-color: rgb(112, 13, 204);
+}
+
+#game-board li.disabled {
+  background-color: rgb(112, 13, 204);
+  color: var(--color-font-header);
+  cursor: default;
+}

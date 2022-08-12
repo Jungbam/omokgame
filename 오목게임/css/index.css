@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  font-family: 'Cute Font', cursive;
+
+  /* color field */
+  --color-font-basic: rgb(99, 99, 130);
+  --color-font-header: rgba(44, 15, 15, 0.9);
+  --color-font-player-name: rgb(99, 255, 42);
+  --color-font-player-symbol: rgb(75, 75, 75);
+
+  --color-backcolor-basic: rgb(249, 223, 108);
+  --color-backcolor-header: rgb(224, 250, 255);
+  --color-backcolor-hover: rgba(255, 187, 0, 0.9);
+  --color-backcolor-box: rgba(83, 114, 255, 0.7);
+
+  color: var(--color-font-basic);
+  background-color: var(--color-backcolor-basic);
+}
+/* header */
+#main-header {
+  background-color: var(--color-backcolor-header);
+  color: var(--color-font-header);
+  padding: 3rem 5%;
+  text-align: center;
+  height: 10rem;
+}
+header h1 {
+  font-size: 4rem;
+  margin: 0;
+}
+header p {
+  text-align: right;
+  margin: 2rem;
+}
+
+/* button */
+.btn {
+  /* 기본버튼 */
+  font: inherit;
+  padding: 0.5rem 1.5rem;
+  background-color: var(--color-backcolor-header);
+  border: 1px solid var(--color-backcolor-header);
+  color: var(--color-font-header);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-alt {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--color-backcolor-header);
+}
+.btn:hover {
+  background-color: var(--color-backcolor-hover);
+  border-color: var(--color-backcolor-hover);
+}
+.btn-alt:hover {
+  background-color: var(--color-backcolor-hover);
+  border-color: var(--color-font-basic);
+}

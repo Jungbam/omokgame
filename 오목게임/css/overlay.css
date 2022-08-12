@@ -1,0 +1,28 @@
+.modal {
+  position: fixed;
+  top: 20%;
+  left: 5%;
+  width: 90%;
+  background-color: var(--color-font-header);
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 3px var(--color-font-basic);
+  display: none;
+}
+#backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(2, 2, 2, 0.4);
+  display: none;
+}
+
+@media (min-width: 48rem) {
+  .modal {
+    left: 50%;
+    transform: translate(-50%);
+    width: 40rem;
+  }
+}
