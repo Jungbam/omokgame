@@ -1,3 +1,6 @@
+:root {
+  --game-board-size: 0;
+}
 #active-game {
   text-align: center;
   margin: 2rem 0 5rem 0;
@@ -32,8 +35,8 @@
   margin: 1rem 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(9, 3rem);
-  grid-template-rows: repeat(9, 3rem);
+  grid-template-columns: repeat(var(--game-board-size), 3rem);
+  grid-template-rows: repeat(var(--game-board-size), 3rem);
   justify-content: center;
   gap: 0.3rem;
 }

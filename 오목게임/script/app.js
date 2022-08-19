@@ -1,6 +1,3 @@
-//게임 판 배열 구성
-
-// 플레이어 edit 오버레이 화면
 let editedPlayer = 0 // 사용자Id 저장변수
 let activePlayer = 0
 
@@ -14,6 +11,18 @@ const players = [
     symbol: 'O',
   },
 ]
+
+const omokGameBoard = document.getElementById('game-board')
+const gameSize = 12
+for (var i = 0; i <= gameSize; i++) {
+  for (var j = 0; j <= gameSize; j++) {
+    var newList = document.createElement('li')
+    newList.setAttribute('data-col', j + 1)
+    newList.setAttribute('data-row', i + 1)
+    omokGameBoard.appendChild(newList)
+  }
+}
+document.documentElement.style.setProperty('--game-board-size', gameSize)
 
 const playerConfigOverlayElement = document.getElementById('config-overlay')
 const backdropElement = document.getElementById('backdrop')
