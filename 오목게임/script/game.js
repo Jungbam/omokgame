@@ -1,14 +1,11 @@
-const gameData = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-]
+const gameBoardSize = parseInt(prompt('몇칸으로 실행할까요?'))
+const checkBoardSize = gameBoardSize + 4
+
+//gameData 판을 지정한 숫자로 간단하게 만드는 함수
+const gameData = new Array(checkBoardSize)
+  .fill(0)
+  .map(() => new Array(checkBoardSize))
+
 const gameOverSpan = document.getElementById('game-over')
 function resetGameStart() {
   activePlayer = 0
@@ -16,9 +13,9 @@ function resetGameStart() {
   const resetLi = document.querySelectorAll('#game-board li')
   let boardIndex = 0
   gameOverSpan.style.display = 'none'
-  for (let i = 0; i <= 8; i++) {
-    for (let j = 0; j <= 8; j++) {
-      gameData[i][j] = 0
+  for (let i = 0; i < gameBoardSize; i++) {
+    for (let j = 0; j < gameBoardSize; j++) {
+      gameData[i + 2][j + 2] = 0
       resetLi[boardIndex].textContent = ''
       resetLi[boardIndex].classList.remove('disabled')
       boardIndex++
@@ -38,26 +35,27 @@ function startNewGame() {
 
 let currentCount = 0
 function checkForGameOver() {
-  for (let i = 0; i <= 4; i++) {
-    for (let j = 0; j <= 8; j++) {
+  for (let i = 2; i < checkBoardSize - 2; i++) {
+    for (let j = 2; j < checkBoardSize - 2; j++) {
+      const inputPlayer = gameData[i][j]
       if (
-        gameData[i][j] > 0 &&
-        ((gameData[i][j] == gameData[i][j + 1] &&
-          gameData[i][j + 1] == gameData[i][j + 2] &&
-          gameData[i][j + 2] == gameData[i][j + 3] &&
-          gameData[i][j + 3] == gameData[i][j + 4]) ||
-          (gameData[i][j] == gameData[i + 1][j + 1] &&
-            gameData[i + 1][j + 1] == gameData[i + 2][j + 2] &&
-            gameData[i + 2][j + 2] == gameData[i + 3][j + 3] &&
-            gameData[i + 3][j + 3] == gameData[i + 4][j + 4]) ||
-          (gameData[i][j] == gameData[i + 1][j] &&
-            gameData[i + 1][j] == gameData[i + 2][j] &&
-            gameData[i + 2][j] == gameData[i + 3][j] &&
-            gameData[i + 3][j] == gameData[i + 4][j]) ||
-          (gameData[i][j] == gameData[i + 1][j - 1] &&
-            gameData[i + 1][j - 1] == gameData[i + 2][j - 2] &&
-            gameData[i + 2][j - 2] == gameData[i + 3][j - 3] &&
-            gameData[i + 3][j - 3] == gameData[i + 4][j - 4]))
+        inputPlayer > 0 &&
+        ((inputPlayer == gameData[i][j - 2] &&
+          inputPlayer == gameData[i][j - 1] &&
+          inputPlayer == gameData[i][j + 1] &&
+          inputPlayer == gameData[i][j + 2]) ||
+          (inputPlayer == gameData[i - 2][j - 2] &&
+            inputPlayer == gameData[i - 1][j - 1] &&
+            inputPlayer == gameData[i + 1][j + 1] &&
+            inputPlayer == gameData[i + 2][j + 2]) ||
+          (inputPlayer == gameData[i - 2][j] &&
+            inputPlayer == gameData[i - 1][j] &&
+            inputPlayer == gameData[i + 1][j] &&
+            inputPlayer == gameData[i + 2][j]) ||
+          (inputPlayer == gameData[i - 2][j + 2] &&
+            inputPlayer == gameData[i - 1][j + 1] &&
+            inputPlayer == gameData[i + 1][j - 1] &&
+            inputPlayer == gameData[i + 2][j - 2]))
       ) {
         // alert('승자 : ' + players[activePlayer].name)
         gameOverSpan.style.display = 'block'
@@ -70,7 +68,6 @@ function checkForGameOver() {
 }
 function countValue() {
   if (currentCount == 81) {
-    // alert('둘 다 아쉽네요. 무승부!!')
     gameOverSpan.style.display = 'block'
     gameOverSpan.textContent = '무승부입니다. 새로운 게임을 시작하세요.'
   }
@@ -82,33 +79,27 @@ function switchPlayer() {
   } else {
     activePlayer = 0
   }
-  console.log(activePlayer)
   activePlayerName.textContent = players[activePlayer].name
 }
 
 function selectGameField(e) {
-  console.log(e.target)
-
   if (e.target.tagName !== 'LI') {
     return
   }
   const selectedField = e.target
-  const selectedColumn = +selectedField.dataset.col - 1
-  const selectedRow = +selectedField.dataset.row - 1
+  const selectedColumn = +selectedField.dataset.col + 1
+  const selectedRow = +selectedField.dataset.row + 1
   if (selectedField.textContent != '') {
     alert('다른 칸을 선택하세요.')
 
     return
   }
-  //   if (gameData[selectedRow][selectedColumn] > 0) {
-  //     alert('다른 칸을 선택하세요.')
-  //     return
-  //   }
   selectedField.textContent = players[activePlayer].symbol
   selectedField.classList.add('disabled')
 
   gameData[selectedRow][selectedColumn] = activePlayer + 1
   checkForGameOver()
+
   switchPlayer()
   currentCount++
   countValue()

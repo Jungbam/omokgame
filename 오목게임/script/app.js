@@ -13,16 +13,16 @@ const players = [
 ]
 
 const omokGameBoard = document.getElementById('game-board')
-const gameSize = 12
-for (var i = 0; i <= gameSize; i++) {
-  for (var j = 0; j <= gameSize; j++) {
+
+for (var i = 0; i < gameBoardSize; i++) {
+  for (var j = 0; j < gameBoardSize; j++) {
     var newList = document.createElement('li')
     newList.setAttribute('data-col', j + 1)
     newList.setAttribute('data-row', i + 1)
     omokGameBoard.appendChild(newList)
   }
 }
-document.documentElement.style.setProperty('--game-board-size', gameSize)
+document.documentElement.style.setProperty('--game-board-size', gameBoardSize)
 
 const playerConfigOverlayElement = document.getElementById('config-overlay')
 const backdropElement = document.getElementById('backdrop')
